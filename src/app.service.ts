@@ -1,5 +1,5 @@
 // ------------ import external dependencies ------------
-import { HttpException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 // ----------- import internal dependencies -------------
 import { paths } from './paths';
@@ -17,7 +17,7 @@ export class AppService {
       paths[stateCode.join('').toUpperCase()];
 
     if (!supportedPaths) {
-      return new HttpException('Code not found', 400);
+      return new BadRequestException('Code not found');
     }
 
     return supportedPaths.find((item) => item.from === Number(currentState));
